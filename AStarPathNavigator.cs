@@ -68,6 +68,8 @@ public class AStarPathNavigator : MonoBehaviour
 								if (Vector3.Distance (transform.position, path.vectorPath [currentWaypoint]) < nextWaypointDistance) {
 										currentWaypoint++;
 								}
+						} else {
+								ai.TargetMet ();
 						}
 						yield return new WaitForSeconds (0.05f);
 				}

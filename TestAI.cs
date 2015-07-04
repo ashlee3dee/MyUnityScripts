@@ -27,6 +27,7 @@ public class TestAI : MonoBehaviour
 		public float minDistanceFromTarget;
 		public float maxDistanceFromTarget;
 		public AStarPathNavigator ASPN;
+		public GameObject weapon;
 		public void Start ()
 		{
 				ASPN = gameObject.GetComponent<AStarPathNavigator> ();
@@ -46,13 +47,19 @@ public class TestAI : MonoBehaviour
 				ASPN.SetTarget (PickTarget ());
 				ASPN.FindPath ();
 		}
+		public void TargetMet ()
+		{
+				ASPN.StopMove ();
+				weapon.transform.LookAt (shootTarget.position);
+		}
 		public Vector3 PickTarget ()
 		{
+				weapon.transform.rotation = Quaternion.identity;
 				float angle = (float)Random.Range (0.0f, 360.0f);
 				float radius = (float)Random.Range (minDistanceFromTarget, maxDistanceFromTarget);
 				Vector3 proposedTarget = CircleUtils.CalculatePointOnCircle (moveTarget.position, angle, radius);
 				RaycastHit hit;
-				Ray r = new Ray (moveTarget.position, transform.position - shootTarget.position.normalized);
+				//Ray r = new Ray (proposedTarget, );
 				
 				//Physics.Raycast(proposedTarget,
 				return proposedTarget;
@@ -60,6 +67,10 @@ public class TestAI : MonoBehaviour
 		IEnumerator UpdatePath ()
 		{
 				while (true) {
+						//replace the distance based retargeting system with
+						//a raycast occlusion based system
+						//should cast a ray towards shot target from proposed target
+						//if occludes with any tile, recalculate target
 						if (Vector3.Distance (ASPN.trueTargetPosition, moveTarget.position) > 2) {
 								ASPN.SetTrueTarget (moveTarget.position);
 								ASPN.SetTarget (PickTarget ());
