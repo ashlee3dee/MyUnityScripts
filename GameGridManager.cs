@@ -9,10 +9,10 @@ public class GameGridManager : MonoBehaviour
 		public GameObject destroyedTile;
 		private bool gridSpawned = false;
 		private GameTile selectedTile;
-		public LayerMask raycastMask;
 		private int enemyDeathCount = 0;
 		//private MyGUIWindow window = new MyGUIWindow ();
 		//public GameObject killCountTextGameObject;
+		public LayerMask raycastMask;
 		public Text killCountText;
 		public AstarPath AStarGrid;
 		//Vector2 selectedTilePos;

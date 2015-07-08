@@ -9,8 +9,6 @@ public class AStarPathNavigator : MonoBehaviour
 		//The point to move to
 		//point that is calculated by AI
 		public Vector3 targetPosition;
-		//point that AI is calculating with
-		public Vector3 trueTargetPosition;
 		//the seeker
 		private Seeker seeker;
 		//the AI
@@ -31,10 +29,6 @@ public class AStarPathNavigator : MonoBehaviour
 		{
 				seeker = GetComponent<Seeker> ();
 				ai = GetComponent<TestAI> ();
-		}
-		public void SetTrueTarget (Vector3 t)
-		{
-				trueTargetPosition = t;
 		}
 		public void SetTarget (Vector3 t)
 		{
